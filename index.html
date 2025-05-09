@@ -16,7 +16,7 @@
     }
 
     header {
-      background-color: #1565c0;
+      background-color: rgb(31, 163, 94); 
       color: white;
       padding: 1.5em 1em;
       font-size: 1.7em;
@@ -90,33 +90,41 @@
   <header>📲 نظام وصل الحساب الإلكتروني للبطاقة التموينية</header>
 
   <img src="logo.png" alt="Logo" class="logo" />
+  <div class="footer-credit">
+    
 
+  </div>
   <button id="openFormBtn">📝 عمل وصل جديد</button>
 
   <div class="footer-credit">
     🧑‍💻 تم برمجة الموقع من قبل
     <span>💎 المبرمج أحمد الذهب</span>
     <div class="social-icons">
-      <a href="https://t.me/ahmed" target="_blank">📨</a>
-      <a href="https://instagram.com/ahmed" target="_blank">📸</a>
+      <a href="https://t.me/amody7" target="telegram">📨</a>
+      <a href="https://instagram.com/a0g0a" target="instagram">📸</a>
     </div>
   </div>
 
   <div class="form-container" id="formSection">
     <div class="form-group">
       <label for="officeName">🏢 اسم المكتب</label>
-      <input type="text" id="officeName" />
+      <input type="text" id="officeName" placeholder="مثلا مكتبة الحارث لخدمات الانترنت والقرطاسية" />
+    </div>
+    <div class="form-group">
+      <label for="officelocation">🏢 🚩 عنوان المكتب</label>
+      <input type="text" id="officelocation" placeholder="مثلا صلاح الدين - الضلوعية" />
     </div>
 
     <div class="form-group">
       <label for="phone">📞 رقم هاتف المكتب</label>
-      <input type="text" id="phone" />
+      <input type="text" id="phone" placeholder="07XXXXXXXXX" />
     </div>
 
     <div class="form-group">
       <label for="updatePrice">💰 السعر الخاص بالتحديث (د.ع)</label>
-      <input type="number" id="updatePrice" />
-    </div>
+      <input type="number" id="updatePrice" placeholder="🚧 ادخل المبلغ بصيغة الالوف مثلا 11000 بدون فارزة" />
+   </div>
+
 
     <div class="form-group">
       <label for="servicePrice">🛠️ سعر أتعاب المكتب (د.ع)</label>
@@ -184,6 +192,7 @@
 
     document.getElementById("printBtn").onclick = function () {
       const office = document.getElementById("officeName").value;
+      const officeloc = document.getElementById("officelocation").value;
       const update = parseInt(updatePrice.value) || 0;
       const service = parseInt(servicePrice.value) || 0;
       const total = update + service;
@@ -205,11 +214,14 @@
           <body>
             <h2>🧾 وصل الحساب الإلكتروني</h2>
             <p><strong>🏢 اسم المكتب:</strong> ${office}</p>
+            <p><strong>🚩 عنوان المكتب:</strong> ${officeloc}</p>
             <p><strong>📞 رقم الهاتف:</strong> ${phone}</p>
             <p><strong>💰 السعر الخاص بالتحديث:</strong> ${format(update)}</p>
+            <p><strong>🚧 الرسوم المعدة من قبل الوزارة</strong></p>
             <p><strong>🛠️ سعر الأتعاب:</strong> ${format(service)}</p>
+            <p><strong>💳 السعر اعلاه شامل عمليات رسوم الايداع والدفع عبر الماستر كارد  والاتعاب</strong></p>
             <p><strong>📦 السعر الكلي:</strong> ${format(total)}</p>
-            <p><strong>👨‍👩‍👧‍👦 وصل حساب لصالح السيدة:</strong> ${head}</p>
+            <p><strong>👨‍👩‍👧‍👦 وصل حساب لصالح السيد/ة:</strong> ${head}</p>
             <br><br>
             <button onclick="window.print()">🖨️ طباعة</button>
           </body>
