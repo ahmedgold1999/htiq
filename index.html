@@ -42,7 +42,7 @@
       margin: 30px 0 10px;
       transition: 0.3s;
     }
-    button#openFormBtn:hover { transform: scale(1.05); background: #00c853; }
+    button#openFormBtn:hover { transform: scale(1.05); background: #00c853; border: 3px solid #27548A; box-shadow: 0 0 8px 4px rgba(227, 92, 92, 1);}
 
     .footer-credit { margin-top: 10px; font-size: 1em; color: #555; }
     .footer-credit span { display: block; margin-top: 5px; font-size: 1.2em; }
@@ -50,15 +50,50 @@
     .social-icons a { margin: 0 8px; text-decoration: none; font-size: 1.5em; }
 
     .form-container {
-      display: none;
-      max-width: 500px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 2em;
-      border-radius: 20px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-      text-align: right;
-    }
+  display: none;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2em;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  position: relative;
+  text-align: right;
+  z-index: 1;
+}
+
+/* حواف متدرجة فقط */
+.form-container::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  z-index: -1;
+  border-radius: 23px;
+  background: linear-gradient(
+    120deg,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet,
+    red
+  );
+  background-size: 300% 300%;
+  animation: moveBorder 5s linear infinite;
+}
+@keyframes moveBorder {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
 
     .form-group { margin-bottom: 1.2em; }
     .form-group label { display: block; margin-bottom: 0.4em; font-weight: bold; }
@@ -82,8 +117,15 @@
       font-size: 1em;
       margin-top: 1.5em;
       cursor: pointer;
-    }
-    #printBtn:hover { background-color: #fb8c00; }
+      transition: all 0.3s ease; /* إضافة انتقال سلس لجميع التأثيرات */
+      }
+
+    #printBtn:hover {
+      background-color: #fb8c00;
+      border: 3px solid #3A59D1; /* إضافة الإطار الملون */
+      box-shadow: 0 0 8px 4px rgba(255, 87, 34, 0.7); /* إضافة تأثير الظل */
+      }
+
   </style>
 </head>
 <body>
@@ -92,7 +134,7 @@
   <img src="logo.png" alt="Logo" class="logo" />
   <div class="footer-credit">
     
-
+    <span></span>
   </div>
   <button id="openFormBtn">📝 عمل وصل جديد</button>
 
@@ -165,7 +207,7 @@
       <label for="headName">👨‍👩‍👧‍👦 اسم رب الأسرة</label>
       <input type="text" id="headName" />
     </div>
-
+    <p><strong> ⚠️ تحذير: الموقع لا يحفظ الوصولات بمجرد تحديث الصفحة يختفي كل شي</strong> </p>
     <button id="printBtn">🖨️ طباعة</button>
   </div>
 
