@@ -145,6 +145,11 @@
     </div>
 
     <div class="form-group">
+      <label for="phone">📞 رقم هاتف المكتب</label>
+      <input type="text" id="phone" />
+    </div>
+
+    <div class="form-group">
       <label for="updatePrice">💰 السعر الخاص بالتحديث (د.ع)</label>
       <input type="number" id="updatePrice" />
     </div>
@@ -159,11 +164,6 @@
     <div class="form-group">
       <label for="headName">👨‍👩‍👧‍👦 اسم رب الأسرة</label>
       <input type="text" id="headName" />
-    </div>
-
-    <div class="form-group">
-      <label for="phone">📞 رقم هاتف المكتب</label>
-      <input type="text" id="phone" />
     </div>
 
     <button id="printBtn">🖨️ طباعة</button>
@@ -184,7 +184,7 @@
     function calculateTotal() {
       const update = parseInt(updatePrice.value) || 0;
       const service = parseInt(servicePrice.value) || 0;
-      totalPrice.textContent = `📦 السعر الكلي: ${update + service} د.ع`;
+      totalPrice.textContent = `📦 السعر الكلي: ${(update + service).toLocaleString('en-US')} د.ع`;
     }
 
     updatePrice.oninput = calculateTotal;
@@ -192,30 +192,46 @@
 
     document.getElementById("printBtn").onclick = function () {
       const office = document.getElementById("officeName").value;
-      const update = updatePrice.value;
-      const service = servicePrice.value;
-      const total = parseInt(update) + parseInt(service);
+      const update = parseInt(updatePrice.value) || 0;
+      const service = parseInt(servicePrice.value) || 0;
+      const total = update + service;
       const head = document.getElementById("headName").value;
       const phone = document.getElementById("phone").value;
+
+      const format = (num) => num.toLocaleString('en-US') + " دينار عراقي";
 
       const printWindow = window.open('', '', 'width=800,height=600');
       printWindow.document.write(`
         <html lang="ar" dir="rtl">
           <head>
-            <title>طباعة الوصل</title>
+            <title>🧾 وصل الحساب</title>
             <style>
-              body { font-family: 'Cairo', sans-serif; padding: 2em; line-height: 2; }
-              h2 { color: #2e7d32; }
+              body {
+                font-family: 'Cairo', sans-serif;
+                padding: 2em;
+                line-height: 2;
+                color: #333;
+                direction: rtl;
+              }
+              h2 {
+                text-align: center;
+                color: #2e7d32;
+                margin-bottom: 30px;
+              }
+              p {
+                font-size: 1.1em;
+                margin: 0.4em 0;
+              }
             </style>
           </head>
           <body>
             <h2>🧾 وصل الحساب الإلكتروني</h2>
             <p><strong>🏢 اسم المكتب:</strong> ${office}</p>
-            <p><strong>💰 السعر الخاص بالتحديث:</strong> ${update} د.ع</p>
-            <p><strong>🛠️ سعر الأتعاب:</strong> ${service} د.ع</p>
-            <p><strong>📦 السعر الكلي:</strong> ${total} د.ع</p>
-            <p><strong>👨‍👩‍👧‍👦 اسم رب الأسرة:</strong> ${head}</p>
             <p><strong>📞 رقم الهاتف:</strong> ${phone}</p>
+            <p><strong>💰 السعر الخاص بالتحديث:</strong> ${format(update)}</p>
+            <p><strong>🛠️ سعر الأتعاب:</strong> ${format(service)}</p>
+            <p><strong>📦 السعر الكلي:</strong> ${format(total)}</p>
+            <p><strong>👨‍👩‍👧‍👦 اسم رب الأسرة:</strong> ${head}</p>
             <br><br>
             <button onclick="window.print()">🖨️ طباعة</button>
           </body>
