@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>وصل الحساب الإلكتروني</title>
+  <title>وصل التموينية الإلكترونية 📄</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Cairo', sans-serif;
-      background: #f2f2f2;
+      background: linear-gradient(to bottom, #e3f2fd, #ffffff);
       margin: 0;
       padding: 0;
       text-align: center;
@@ -16,53 +16,78 @@
     }
 
     header {
-      background-color: #00695c;
+      background-color: #1565c0;
       color: white;
       padding: 1.5em 1em;
-      font-size: 1.8em;
+      font-size: 1.7em;
       font-weight: bold;
-      border-bottom: 4px solid #004d40;
+      border-bottom: 4px solid #0d47a1;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
     img.logo {
-      margin: 20px auto;
-      width: 120px;
+      margin: 30px auto 10px;
+      width: 100px;
       height: auto;
     }
 
     button#openFormBtn {
-      background: linear-gradient(to right, #00bfa5, #1de9b6);
+      background: linear-gradient(to right, #00c853, #64dd17);
       color: white;
       border: none;
       padding: 1em 2em;
       font-size: 1.1em;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
-      margin-bottom: 20px;
+      margin: 30px 0 10px;
+      transition: 0.3s;
     }
 
     button#openFormBtn:hover {
-      background: #00bfa5;
+      transform: scale(1.05);
+      background: #00c853;
+    }
+
+    .footer-credit {
+      margin-top: 10px;
+      font-size: 1em;
+      color: #555;
+    }
+
+    .footer-credit span {
+      display: block;
+      margin-top: 5px;
+      font-size: 1.2em;
+    }
+
+    .social-icons {
+      margin-top: 10px;
+    }
+
+    .social-icons a {
+      margin: 0 8px;
+      text-decoration: none;
+      font-size: 1.5em;
     }
 
     .form-container {
       display: none;
       max-width: 500px;
       margin: 0 auto;
-      background: white;
+      background: #fff;
       padding: 2em;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      text-align: right;
     }
 
     .form-group {
-      margin-bottom: 1em;
-      text-align: right;
+      margin-bottom: 1.2em;
     }
 
     .form-group label {
       display: block;
-      margin-bottom: 0.3em;
+      margin-bottom: 0.4em;
       font-weight: bold;
     }
 
@@ -76,12 +101,13 @@
 
     #totalPrice {
       font-weight: bold;
-      color: #00695c;
+      color: #2e7d32;
       margin-top: 1em;
+      font-size: 1.2em;
     }
 
     #printBtn {
-      background-color: #ff7043;
+      background-color: #ff9800;
       color: white;
       padding: 1em 2em;
       border: none;
@@ -92,46 +118,55 @@
     }
 
     #printBtn:hover {
-      background-color: #ff5722;
+      background-color: #fb8c00;
     }
   </style>
 </head>
 <body>
-  <header>نظام وصل الحساب الإلكتروني للبطاقة التموينية</header>
+  <header>📲 نظام وصل الحساب الإلكتروني للبطاقة التموينية</header>
 
   <img src="logo.png" alt="Logo" class="logo" />
 
-  <button id="openFormBtn">عمل وصل جديد</button>
+  <button id="openFormBtn">📝 عمل وصل جديد</button>
+
+  <div class="footer-credit">
+    🧑‍💻 تم برمجة الموقع من قبل
+    <span>💎 المبرمج أحمد الذهب</span>
+    <div class="social-icons">
+      <a href="https://t.me/ahmed" target="_blank">📨</a>
+      <a href="https://instagram.com/ahmed" target="_blank">📸</a>
+    </div>
+  </div>
 
   <div class="form-container" id="formSection">
     <div class="form-group">
-      <label for="officeName">اسم المكتب</label>
-      <input type="text" id="officeName" required />
+      <label for="officeName">🏢 اسم المكتب</label>
+      <input type="text" id="officeName" />
     </div>
 
     <div class="form-group">
-      <label for="updatePrice">السعر الخاص بالتحديث (د.ع)</label>
-      <input type="number" id="updatePrice" required />
+      <label for="updatePrice">💰 السعر الخاص بالتحديث (د.ع)</label>
+      <input type="number" id="updatePrice" />
     </div>
 
     <div class="form-group">
-      <label for="servicePrice">سعر أتعاب المكتب (د.ع)</label>
-      <input type="number" id="servicePrice" required />
+      <label for="servicePrice">🛠️ سعر أتعاب المكتب (د.ع)</label>
+      <input type="number" id="servicePrice" />
     </div>
 
-    <div id="totalPrice">السعر الكلي: 0 د.ع</div>
+    <div id="totalPrice">📦 السعر الكلي: 0 د.ع</div>
 
     <div class="form-group">
-      <label for="headName">اسم رب الأسرة</label>
-      <input type="text" id="headName" required />
+      <label for="headName">👨‍👩‍👧‍👦 اسم رب الأسرة</label>
+      <input type="text" id="headName" />
     </div>
 
     <div class="form-group">
-      <label for="phone">رقم هاتف المكتب</label>
-      <input type="text" id="phone" required />
+      <label for="phone">📞 رقم هاتف المكتب</label>
+      <input type="text" id="phone" />
     </div>
 
-    <button id="printBtn">طباعة</button>
+    <button id="printBtn">🖨️ طباعة</button>
   </div>
 
   <script>
@@ -149,7 +184,7 @@
     function calculateTotal() {
       const update = parseInt(updatePrice.value) || 0;
       const service = parseInt(servicePrice.value) || 0;
-      totalPrice.textContent = `السعر الكلي: ${update + service} د.ع`;
+      totalPrice.textContent = `📦 السعر الكلي: ${update + service} د.ع`;
     }
 
     updatePrice.oninput = calculateTotal;
@@ -170,19 +205,19 @@
             <title>طباعة الوصل</title>
             <style>
               body { font-family: 'Cairo', sans-serif; padding: 2em; line-height: 2; }
-              h2 { color: #00695c; }
+              h2 { color: #2e7d32; }
             </style>
           </head>
           <body>
-            <h2>وصل الحساب الإلكتروني</h2>
-            <p><strong>اسم المكتب:</strong> ${office}</p>
-            <p><strong>السعر الخاص بالتحديث:</strong> ${update} د.ع</p>
-            <p><strong>سعر أتعاب المكتب:</strong> ${service} د.ع</p>
-            <p><strong>السعر الكلي:</strong> ${total} د.ع</p>
-            <p><strong>اسم رب الأسرة:</strong> ${head}</p>
-            <p><strong>رقم الهاتف:</strong> ${phone}</p>
+            <h2>🧾 وصل الحساب الإلكتروني</h2>
+            <p><strong>🏢 اسم المكتب:</strong> ${office}</p>
+            <p><strong>💰 السعر الخاص بالتحديث:</strong> ${update} د.ع</p>
+            <p><strong>🛠️ سعر الأتعاب:</strong> ${service} د.ع</p>
+            <p><strong>📦 السعر الكلي:</strong> ${total} د.ع</p>
+            <p><strong>👨‍👩‍👧‍👦 اسم رب الأسرة:</strong> ${head}</p>
+            <p><strong>📞 رقم الهاتف:</strong> ${phone}</p>
             <br><br>
-            <button onclick="window.print()">طباعة</button>
+            <button onclick="window.print()">🖨️ طباعة</button>
           </body>
         </html>
       `);
