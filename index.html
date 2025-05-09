@@ -42,33 +42,12 @@
       margin: 30px 0 10px;
       transition: 0.3s;
     }
+    button#openFormBtn:hover { transform: scale(1.05); background: #00c853; }
 
-    button#openFormBtn:hover {
-      transform: scale(1.05);
-      background: #00c853;
-    }
-
-    .footer-credit {
-      margin-top: 10px;
-      font-size: 1em;
-      color: #555;
-    }
-
-    .footer-credit span {
-      display: block;
-      margin-top: 5px;
-      font-size: 1.2em;
-    }
-
-    .social-icons {
-      margin-top: 10px;
-    }
-
-    .social-icons a {
-      margin: 0 8px;
-      text-decoration: none;
-      font-size: 1.5em;
-    }
+    .footer-credit { margin-top: 10px; font-size: 1em; color: #555; }
+    .footer-credit span { display: block; margin-top: 5px; font-size: 1.2em; }
+    .social-icons { margin-top: 10px; }
+    .social-icons a { margin: 0 8px; text-decoration: none; font-size: 1.5em; }
 
     .form-container {
       display: none;
@@ -81,17 +60,10 @@
       text-align: right;
     }
 
-    .form-group {
-      margin-bottom: 1.2em;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.4em;
-      font-weight: bold;
-    }
-
-    .form-group input {
+    .form-group { margin-bottom: 1.2em; }
+    .form-group label { display: block; margin-bottom: 0.4em; font-weight: bold; }
+    .form-group input,
+    .form-group select {
       width: 100%;
       padding: 0.8em;
       border: 1px solid #ccc;
@@ -99,12 +71,7 @@
       font-size: 1em;
     }
 
-    #totalPrice {
-      font-weight: bold;
-      color: #2e7d32;
-      margin-top: 1em;
-      font-size: 1.2em;
-    }
+    #totalPrice { font-weight: bold; color: #2e7d32; margin-top: 1em; font-size: 1.2em; }
 
     #printBtn {
       background-color: #ff9800;
@@ -116,10 +83,7 @@
       margin-top: 1.5em;
       cursor: pointer;
     }
-
-    #printBtn:hover {
-      background-color: #fb8c00;
-    }
+    #printBtn:hover { background-color: #fb8c00; }
   </style>
 </head>
 <body>
@@ -156,7 +120,35 @@
 
     <div class="form-group">
       <label for="servicePrice">🛠️ سعر أتعاب المكتب (د.ع)</label>
-      <input type="number" id="servicePrice" />
+      <select id="servicePrice">
+        <option value="0" selected disabled>اختر السعر</option>
+        <!-- خيارات من 1,000 إلى 25,000 -->
+        <option value="1000">1,000</option>
+        <option value="2000">2,000</option>
+        <option value="3000">3,000</option>
+        <option value="4000">4,000</option>
+        <option value="5000">5,000</option>
+        <option value="6000">6,000</option>
+        <option value="7000">7,000</option>
+        <option value="8000">8,000</option>
+        <option value="9000">9,000</option>
+        <option value="10000">10,000</option>
+        <option value="11000">11,000</option>
+        <option value="12000">12,000</option>
+        <option value="13000">13,000</option>
+        <option value="14000">14,000</option>
+        <option value="15000">15,000</option>
+        <option value="16000">16,000</option>
+        <option value="17000">17,000</option>
+        <option value="18000">18,000</option>
+        <option value="19000">19,000</option>
+        <option value="20000">20,000</option>
+        <option value="21000">21,000</option>
+        <option value="22000">22,000</option>
+        <option value="23000">23,000</option>
+        <option value="24000">24,000</option>
+        <option value="25000">25,000</option>
+      </select>
     </div>
 
     <div id="totalPrice">📦 السعر الكلي: 0 د.ع</div>
@@ -188,7 +180,7 @@
     }
 
     updatePrice.oninput = calculateTotal;
-    servicePrice.oninput = calculateTotal;
+    servicePrice.onchange = calculateTotal;
 
     document.getElementById("printBtn").onclick = function () {
       const office = document.getElementById("officeName").value;
@@ -197,31 +189,17 @@
       const total = update + service;
       const head = document.getElementById("headName").value;
       const phone = document.getElementById("phone").value;
+      const format = n => n.toLocaleString('en-US') + " دينار عراقي";
 
-      const format = (num) => num.toLocaleString('en-US') + " دينار عراقي";
-
-      const printWindow = window.open('', '', 'width=800,height=600');
-      printWindow.document.write(`
+      const w = window.open('', '', 'width=800,height=600');
+      w.document.write(`
         <html lang="ar" dir="rtl">
           <head>
             <title>🧾 وصل الحساب</title>
             <style>
-              body {
-                font-family: 'Cairo', sans-serif;
-                padding: 2em;
-                line-height: 2;
-                color: #333;
-                direction: rtl;
-              }
-              h2 {
-                text-align: center;
-                color: #2e7d32;
-                margin-bottom: 30px;
-              }
-              p {
-                font-size: 1.1em;
-                margin: 0.4em 0;
-              }
+              body { font-family: 'Cairo', sans-serif; padding: 2em; line-height: 2; color: #333; }
+              h2 { text-align: center; color: #2e7d32; margin-bottom: 30px; }
+              p { font-size: 1.1em; margin: .4em 0; }
             </style>
           </head>
           <body>
@@ -231,13 +209,13 @@
             <p><strong>💰 السعر الخاص بالتحديث:</strong> ${format(update)}</p>
             <p><strong>🛠️ سعر الأتعاب:</strong> ${format(service)}</p>
             <p><strong>📦 السعر الكلي:</strong> ${format(total)}</p>
-            <p><strong>👨‍👩‍👧‍👦 اسم رب الأسرة:</strong> ${head}</p>
+            <p><strong>👨‍👩‍👧‍👦 وصل حساب لصالح السيدة:</strong> ${head}</p>
             <br><br>
             <button onclick="window.print()">🖨️ طباعة</button>
           </body>
         </html>
       `);
-      printWindow.document.close();
+      w.document.close();
     };
   </script>
 </body>
