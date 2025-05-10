@@ -16,7 +16,7 @@
     }
 
     header {
-      background-color: rgb(31, 163, 94); 
+      background-color: rgb(31, 163, 94); /* شداسوي هنا هااااااااااا */
       color: white;
       padding: 1.5em 1em;
       font-size: 1.7em;
@@ -62,7 +62,6 @@
   z-index: 1;
 }
 
-/* حواف متدرجة فقط */
 .form-container::before {
   content: "";
   position: absolute;
@@ -72,28 +71,9 @@
   bottom: -3px;
   z-index: -1;
   border-radius: 23px;
-  background: linear-gradient(
-    120deg,
-    red,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    violet,
-    red
-  );
-  background-size: 300% 300%;
-  animation: moveBorder 5s linear infinite;
+  background: #ccc; /* لون رمادي بسيط وثابت كإطار */
 }
-@keyframes moveBorder {
-  0% {
-    background-position: 100% 0;
-  }
-  100% {
-    background-position: 0 0;
-  }
-}
+
 
     .form-group { margin-bottom: 1.2em; }
     .form-group label { display: block; margin-bottom: 0.4em; font-weight: bold; }
@@ -109,22 +89,24 @@
     #totalPrice { font-weight: bold; color: #2e7d32; margin-top: 1em; font-size: 1.2em; }
 
     #printBtn {
-      background-color: #ff9800;
-      color: white;
-      padding: 1em 2em;
-      border: none;
-      border-radius: 10px;
-      font-size: 1em;
-      margin-top: 1.5em;
-      cursor: pointer;
-      transition: all 0.3s ease; /* إضافة انتقال سلس لجميع التأثيرات */
-      }
+  background-color: #ff9800;
+  color: white;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  margin: 2em auto 0; /* وسطه أفقياً من الأعلى بمقدار مناسب */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block; /* تأكيد أن الزر سلوك block للتوسيط */
+}
 
     #printBtn:hover {
       background-color: #fb8c00;
-      border: 3px solid #3A59D1; /* إضافة الإطار الملون */
-      box-shadow: 0 0 8px 4px rgba(255, 87, 34, 0.7); /* إضافة تأثير الظل */
+      #border: 3px solid #3A59D1; /* إضافة الإطار الملون */
+      #box-shadow: 0 0 8px 4px rgba(255, 87, 34, 0.7); /* إضافة تأثير الظل */
       }
+
 
   </style>
 </head>
@@ -150,28 +132,29 @@
   <div class="form-container" id="formSection">
     <div class="form-group">
       <label for="officeName">🏢 اسم المكتب</label>
-      <input type="text" id="officeName" placeholder="مثلا مكتبة الحارث لخدمات الانترنت والقرطاسية" />
+      <input type="text" id="officeName" placeholder="مثلا مكتبة الحارث لخدمات الانترنت والقرطاسية" required />
     </div>
     <div class="form-group">
       <label for="officelocation">🏢 🚩 عنوان المكتب</label>
-      <input type="text" id="officelocation" placeholder="مثلا صلاح الدين - الضلوعية" />
+      <input type="text" id="officelocation" placeholder="مثلا صلاح الدين - الضلوعية" required />
     </div>
 
     <div class="form-group">
       <label for="phone">📞 رقم هاتف المكتب</label>
-      <input type="text" id="phone" placeholder="07XXXXXXXXX" />
+      <input type="text" id="phone" placeholder="07XXXXXXXXX" required />
     </div>
 
     <div class="form-group">
       <label for="updatePrice">💰 السعر الخاص بالتحديث (د.ع)</label>
-      <input type="number" id="updatePrice" placeholder="🚧 ادخل المبلغ بصيغة الالوف مثلا 11000 بدون فارزة" />
+      <select id="updatePrice" required>
+    <option value="0" disabled selected>اضغط هنا لاختيار السعر</option>
+      </select>
    </div>
-
 
     <div class="form-group">
       <label for="servicePrice">🛠️ سعر أتعاب المكتب (د.ع)</label>
-      <select id="servicePrice">
-        <option value="0" selected disabled>اختر السعر</option>
+      <select id="servicePrice" required>
+        <option value="0" selected disabled>اضغط هنا لاختيار السعر</option>
         <!-- خيارات من 1,000 إلى 25,000 -->
         <option value="1000">1,000</option>
         <option value="2000">2,000</option>
@@ -205,10 +188,10 @@
 
     <div class="form-group">
       <label for="headName">👨‍👩‍👧‍👦 اسم رب الأسرة</label>
-      <input type="text" id="headName" />
+      <input type="text" id="headName" placeholder="فلان الفلاني" required />
     </div>
     <p><strong> ⚠️ تحذير: الموقع لا يحفظ الوصولات بمجرد تحديث الصفحة يختفي كل شي</strong> </p>
-    <button id="printBtn">🖨️ طباعة</button>
+    <button id="printBtn">🖨️ طباعة الوصل الحسابي</button>
   </div>
 
   <script>
@@ -222,6 +205,13 @@
       formSection.style.display = "block";
       openFormBtn.style.display = "none";
     };
+    // إنشاء قائمة الأسعار من 1000 إلى 150000 تلقائيًا
+for (let i = 1000; i <= 250000; i += 1000) {
+  const option = document.createElement("option");
+  option.value = i;
+  option.textContent = i.toLocaleString('en-US');
+  updatePrice.appendChild(option);
+}
 
     function calculateTotal() {
       const update = parseInt(updatePrice.value) || 0;
@@ -248,25 +238,117 @@
           <head>
             <title>🧾 وصل الحساب</title>
             <style>
-              body { font-family: 'Cairo', sans-serif; padding: 2em; line-height: 2; color: #333; }
-              h2 { text-align: center; color: #2e7d32; margin-bottom: 30px; }
-              p { font-size: 1.1em; margin: .4em 0; }
-            </style>
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: #f4f6f9;
+    padding: 2em;
+    color: #333;
+  }
+
+  h2 {
+    text-align: center;
+    color: #2e7d32;
+    margin-bottom: 2em;
+    font-size: 1.8em;
+  }
+
+  .receipt {
+    background: #fff;
+    border-radius: 16px;
+    max-width: 600px;
+    margin: auto;
+    padding: 2em 2.5em;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+
+  .receipt p {
+    font-size: 1.1em;
+    margin: 0.8em 0;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .receipt p strong {
+    color: #444;
+    min-width: 220px;
+  }
+
+  .receipt p.total {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #2e7d32;
+    border-bottom: none;
+    margin-top: 1.5em;
+  }
+
+  button {
+    display: block;
+    margin: 3em auto 1em;
+    background-color: #ff9800;
+    color: white;
+    padding: 1em 2.5em;
+    border: none;
+    border-radius: 12px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background-color: #fb8c00;
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+  }
+.icon-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #FAF6E9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.icon-circle:hover {
+  transform: scale(1.1);
+}
+
+.icon-circle img {
+  width: 110px;
+  height: 110px;
+  filter: invert(1);
+}
+
+
+</style>
           </head>
           <body>
-            <h2>🧾 وصل الحساب الإلكتروني</h2>
-            <p><strong>🏢 اسم المكتب:</strong> ${office}</p>
-            <p><strong>🚩 عنوان المكتب:</strong> ${officeloc}</p>
-            <p><strong>📞 رقم الهاتف:</strong> ${phone}</p>
-            <p><strong>💰 السعر الخاص بالتحديث:</strong> ${format(update)}</p>
-            <p><strong>🚧 الرسوم المعدة من قبل الوزارة</strong></p>
-            <p><strong>🛠️ سعر الأتعاب:</strong> ${format(service)}</p>
-            <p><strong>💳 السعر اعلاه شامل عمليات رسوم الايداع والدفع عبر الماستر كارد  والاتعاب</strong></p>
-            <p><strong>📦 السعر الكلي:</strong> ${format(total)}</p>
-            <p><strong>👨‍👩‍👧‍👦 وصل حساب لصالح السيد/ة:</strong> ${head}</p>
-            <br><br>
-            <button onclick="window.print()">🖨️ طباعة</button>
-          </body>
+ 
+ <div class="icon-circle">
+  <img src="logo.png" alt="check icon">
+</div>
+ 
+  <div class="receipt">
+  <h2>🧾 وصل الحساب الإلكتروني</h2>
+  <p><strong>🏢 اسم المكتب:</strong> ${office}</p>
+  <p><strong>🚩 عنوان المكتب:</strong> ${officeloc}</p>
+  <p><strong>📞 رقم الهاتف:</strong> ${phone}</p>
+  <p><strong>💰 السعر الخاص بالتحديث:</strong> ${format(update)}</p>
+  <p><strong>🚧 الرسوم اعلاه معدة من قبل الوزارة:</strong> -</p>
+  <p><strong>🛠️ سعر الأتعاب:</strong> ${format(service)}</p>
+  <p><strong>💳 شامل رسوم الإيداع والدفع عبر الماستر كارد:</strong> ✅</p>
+  <p class="total"><strong>📦 السعر الكلي:</strong> ${format(total)}</p>
+  <p><strong>👨‍👩‍👧‍👦 لصالح السيد/ة:</strong> ${head}</p>
+</div>
+
+<button onclick="window.print()">🖨️ طباعة</button>
+
+</body>
+
         </html>
       `);
       w.document.close();
