@@ -1,358 +1,740 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>وصل التموينية الإلكترونية 📄</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Cairo', sans-serif;
-      background: linear-gradient(to bottom, #e3f2fd, #ffffff);
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      color: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل المراكز الامتحانية العراقية - INPT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    header {
-      background-color: rgb(31, 163, 94); /* شداسوي هنا هااااااااااا */
-      color: white;
-      padding: 1.5em 1em;
-      font-size: 1.7em;
-      font-weight: bold;
-      border-bottom: 4px solid #0d47a1;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
+        :root {
+            --primary: #1a365d;
+            --secondary: #2d3748;
+            --accent: #3182ce;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --success: #38a169;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
 
-    img.logo {
-      margin: 30px auto 10px;
-      width: 100px;
-      height: auto;
-    }
+        body {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
 
-    button#openFormBtn {
-      background: linear-gradient(to right, #00c853, #64dd17);
-      color: white;
-      border: none;
-      padding: 1em 2em;
-      font-size: 1.1em;
-      border-radius: 12px;
-      cursor: pointer;
-      margin: 30px 0 10px;
-      transition: 0.3s;
-    }
-    button#openFormBtn:hover { transform: scale(1.05); background: #00c853; border: 3px solid #27548A; box-shadow: 0 0 8px 4px rgba(227, 92, 92, 1);}
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-    .footer-credit { margin-top: 10px; font-size: 1em; color: #555; }
-    .footer-credit span { display: block; margin-top: 5px; font-size: 1.2em; }
-    .social-icons { margin-top: 10px; }
-    .social-icons a { margin: 0 8px; text-decoration: none; font-size: 1.5em; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
 
-    .form-container {
-  display: none;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 2em;
-  border-radius: 20px;
-  background: #fff;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-  position: relative;
-  text-align: right;
-  z-index: 1;
-}
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.form-container::before {
-  content: "";
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  right: -3px;
-  bottom: -3px;
-  z-index: -1;
-  border-radius: 23px;
-  background: #ccc; /* لون رمادي بسيط وثابت كإطار */
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
 
+        .logo i {
+            font-size: 2rem;
+            color: #63b3ed;
+        }
 
-    .form-group { margin-bottom: 1.2em; }
-    .form-group label { display: block; margin-bottom: 0.4em; font-weight: bold; }
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 0.8em;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1em;
-    }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
 
-    #totalPrice { font-weight: bold; color: #2e7d32; margin-top: 1em; font-size: 1.2em; }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
 
-    #printBtn {
-  background-color: #ff9800;
-  color: white;
-  padding: 1em 2em;
-  border: none;
-  border-radius: 10px;
-  font-size: 1em;
-  margin: 2em auto 0; /* وسطه أفقياً من الأعلى بمقدار مناسب */
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: block; /* تأكيد أن الزر سلوك block للتوسيط */
-}
+        .nav-links a:hover {
+            color: #90cdf4;
+        }
 
-    #printBtn:hover {
-      background-color: #fb8c00;
-      #border: 3px solid #3A59D1; /* إضافة الإطار الملون */
-      #box-shadow: 0 0 8px 4px rgba(255, 87, 34, 0.7); /* إضافة تأثير الظل */
-      }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #90cdf4;
+            transition: width 0.3s;
+        }
 
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-  </style>
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-bottom: 3rem;
+            border-radius: 0 0 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="white"></path></svg>');
+            background-size: cover;
+            opacity: 0.1;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Filters */
+        .filters {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+            position: sticky;
+            top: 80px;
+            z-index: 999;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .province-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .province-btn {
+            padding: 0.5rem 1rem;
+            background: #edf2f7;
+            border: none;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .province-btn:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        .province-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Centers Grid */
+        .centers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .center-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .center-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .province-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .center-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        .center-details {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .center-location {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .center-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: auto;
+        }
+
+        .center-link:hover {
+            background: #2c5282;
+            transform: translateX(-3px);
+        }
+
+        .center-link i {
+            transition: transform 0.3s;
+        }
+
+        .center-link:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-right: 0.5rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #4a5568;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .centers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .filters {
+                top: 70px;
+            }
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+            min-width: 150px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e2e8f0;
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-  <header>📲 نظام وصل الحساب الإلكتروني للبطاقة التموينية</header>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>دليل المراكز الامتحانية</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#centers">المراكز</a>
+                <a href="#about">عن الموقع</a>
+                <a href="#contact">اتصل بنا</a>
+            </nav>
+        </div>
+    </header>
 
-  <img src="logo.png" alt="Logo" class="logo" />
-  <div class="footer-credit">
-    
-    <span></span>
-  </div>
-  <button id="openFormBtn">📝 عمل وصل جديد</button>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>المراكز الامتحانية المعتمدة في العراق</h1>
+            <p>يتم إجراء الاختبارات الوطنية في مجموعة من المراكز المعتمدة المنتشرة في مختلف المحافظات العراقية لضمان سهولة الوصول لجميع المتقدمين.</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="total-centers">0</span>
+                    <span class="stat-label">مركز معتمد</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="total-provinces">0</span>
+                    <span class="stat-label">محافظة</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">معتمد رسمياً</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="footer-credit">
-    🧑‍💻 تم برمجة الموقع من قبل
-    <span>💎 المبرمج أحمد الذهب</span>
-    <div class="social-icons">
-      <a href="https://t.me/amody7" target="telegram">📨</a>
-      <a href="https://instagram.com/a0g0a" target="instagram">📸</a>
-    </div>
-  </div>
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Filters -->
+        <section class="filters" id="filters">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="ابحث عن مركز أو جامعة...">
+            </div>
+            
+            <h3>تصفية حسب المحافظة:</h3>
+            <div class="province-filters" id="provinceFilters">
+                <!-- سيتم إضافة أزرار المحافظات ديناميكياً -->
+            </div>
+        </section>
 
-  <div class="form-container" id="formSection">
-    <div class="form-group">
-      <label for="officeName">🏢 اسم المكتب</label>
-      <input type="text" id="officeName" placeholder="مثلا مكتبة الحارث لخدمات الانترنت والقرطاسية" required />
-    </div>
-    <div class="form-group">
-      <label for="officelocation">🏢 🚩 عنوان المكتب</label>
-      <input type="text" id="officelocation" placeholder="مثلا صلاح الدين - الضلوعية" required />
-    </div>
+        <!-- Centers Grid -->
+        <section id="centers">
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary);">المراكز المتاحة</h2>
+            <div class="centers-grid" id="centersGrid">
+                <!-- سيتم إضافة المراكز ديناميكياً -->
+            </div>
+        </section>
+    </main>
 
-    <div class="form-group">
-      <label for="phone">📞 رقم هاتف المكتب</label>
-      <input type="text" id="phone" placeholder="07XXXXXXXXX" required />
-    </div>
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>عن الدليل</h3>
+                    <p>دليل شامل للمراكز الامتحانية المعتمدة للاختبار الوطني العراقي في مختلف محافظات العراق.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <div class="footer-links">
+                        <a href="#centers">جميع المراكز</a>
+                        <a href="#filters">بحث متقدم</a>
+                        <a href="#about">المساعدة</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>معلومات التواصل</h3>
+                    <div class="footer-links">
+                        <a href="mailto:info@inpt.iq"><i class="fas fa-envelope"></i> info@inpt.iq</a>
+                        <a href="tel:+964770000000"><i class="fas fa-phone"></i> +964 770 000 000</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2024 جميع الحقوق محفوظة - الدليل الإلكتروني للمراكز الامتحانية العراقية</p>
+            </div>
+        </div>
+    </footer>
 
-    <div class="form-group">
-      <label for="updatePrice">💰 السعر الخاص بالتحديث (د.ع)</label>
-      <select id="updatePrice" required>
-    <option value="0" disabled selected>اضغط هنا لاختيار السعر</option>
-      </select>
-   </div>
+    <script>
+        // بيانات المراكز المستخرجة من السورس كود
+        const examCenters = [
+            {
+                province: "الديوانية",
+                name: "جامعة القادسية",
+                location: "رئاسة الجامعة - مركز الحاسبة الالكترونية",
+                link: "VExamExaminationCenters?id=b59741ed-e624-409d-bb17-05d1c8996edf"
+            },
+            {
+                province: "بغداد",
+                name: "الجامعة العراقية",
+                location: "رئاسة الجامعة - مركز التطوير و التعليم المستمر",
+                link: "VExamExaminationCenters?id=055e00df-d7ea-40bb-bc9d-13cb4e9285e4"
+            },
+            {
+                province: "كركوك",
+                name: "الجامعة التقنية الشمالية",
+                location: "رئاسة الجامعة - مركز التعليم المستمر الكلية التقنية حويجة",
+                link: "VExamExaminationCenters?id=9670dcac-9820-4451-86f1-31547ad764d1"
+            },
+            {
+                province: "بغداد",
+                name: "جامعة بغداد",
+                location: "رئاسة الجامعة - مركز الحاسبة الالكترونية",
+                link: "VExamExaminationCenters?id=f0104b99-af5a-1994-6f19-3a10fb89f494"
+            },
+            {
+                province: "بغداد",
+                name: "جامعة بغداد",
+                location: "رئاسة الجامعة - مركز التعليم المستمر",
+                link: "VExamExaminationCenters?id=7da3cd31-0598-42cf-60fa-3a1100b68381"
+            },
+            {
+                province: "البصرة",
+                name: "الجامعة التقنية الجنوبية",
+                location: "رئاسة الجامعة - مركز الحاسبة الالكترونية",
+                link: "VExamExaminationCenters?id=0a72c3bb-19b3-8fcd-2491-3a1100c3ca1c"
+            },
+            {
+                province: "البصرة",
+                name: "الجامعة التقنية الجنوبية",
+                location: "رئاسة الجامعة - مركز التعليم المستمر",
+                link: "VExamExaminationCenters?id=0fa42d70-5a79-ec86-8021-3a1102ca0e92"
+            },
+            {
+                province: "كربلاء",
+                name: "جامعة وارث الانبياء",
+                location: "رئاسة الجامعة - مركز التعليم المستمر",
+                link: "VExamExaminationCenters?id=d685df9f-169f-37a1-c323-3a1102cee0b7"
+            },
+            {
+                province: "البصرة",
+                name: "جامعة البصرة",
+                location: "رئاسة الجامعة - مركز تكنولوجيا المعلومات والاتصالات",
+                link: "VExamExaminationCenters?id=a802e25b-107f-f8f7-b5b2-3a1102d321ca"
+            },
+            {
+                province: "الانبار",
+                name: "جامعة الأنبار",
+                location: "رئاسة الجامعة - مركز الحاسبة الالكترونية",
+                link: "VExamExaminationCenters?id=021a832a-423e-d4d0-c285-3a1102dd1a03"
+            },
+            {
+                province: "النجف",
+                name: "جامعة الفرات الأوسط التقنية",
+                location: "رئاسة الجامعة - مركز التعليم المستمر كوفة",
+                link: "VExamExaminationCenters?id=ebd62b4c-4ae4-fed4-41e7-3a1102e3041a"
+            },
+            {
+                province: "كركوك",
+                name: "جامعة كركوك",
+                location: "رئاسة الجامعة - مركز الحاسبة الالكترونية",
+                link: "VExamExaminationCenters?id=d3bd075d-2f88-5647-ee50-3a1102e699c0"
+            },
+            {
+                province: "بابل",
+                name: "جامعة القاسم الخضراء",
+                location: "رئاسة الجامعة - مركز الحاسبة الالكترونية",
+                link: "VExamExaminationCenters?id=e45eeda2-6d26-498c-f581-3a1102ec0797"
+            },
+            {
+                province: "بابل",
+                name: "جامعة بابل",
+                location: "رئاسة الجامعة - مركز الحاسبة الالكترونية",
+                link: "VExamExaminationCenters?id=7655c26d-ec68-965e-b28c-3a1102ee7177"
+            },
+            {
+                province: "ذي قار",
+                name: "جامعة ذي قار",
+                location: "رئاسة الجامعة - مركز الحاسبة الالكترونية",
+                link: "VExamExaminationCenters?id=4435919a-4f80-7642-a683-3a1102f18423"
+            }
+        ];
 
-    <div class="form-group">
-      <label for="servicePrice">🛠️ سعر أتعاب المكتب (د.ع)</label>
-      <select id="servicePrice" required>
-        <option value="0" selected disabled>اضغط هنا لاختيار السعر</option>
-        <!-- خيارات من 1,000 إلى 25,000 -->
-        <option value="1000">1,000</option>
-        <option value="2000">2,000</option>
-        <option value="3000">3,000</option>
-        <option value="4000">4,000</option>
-        <option value="5000">5,000</option>
-        <option value="6000">6,000</option>
-        <option value="7000">7,000</option>
-        <option value="8000">8,000</option>
-        <option value="9000">9,000</option>
-        <option value="10000">10,000</option>
-        <option value="11000">11,000</option>
-        <option value="12000">12,000</option>
-        <option value="13000">13,000</option>
-        <option value="14000">14,000</option>
-        <option value="15000">15,000</option>
-        <option value="16000">16,000</option>
-        <option value="17000">17,000</option>
-        <option value="18000">18,000</option>
-        <option value="19000">19,000</option>
-        <option value="20000">20,000</option>
-        <option value="21000">21,000</option>
-        <option value="22000">22,000</option>
-        <option value="23000">23,000</option>
-        <option value="24000">24,000</option>
-        <option value="25000">25,000</option>
-      </select>
-    </div>
+        // استخراج المحافظات الفريدة
+        const provinces = [...new Set(examCenters.map(center => center.province))];
 
-    <div id="totalPrice">📦 السعر الكلي: 0 د.ع</div>
+        // تهيئة التطبيق
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحديث الإحصائيات
+            document.getElementById('total-centers').textContent = examCenters.length;
+            document.getElementById('total-provinces').textContent = provinces.length;
 
-    <div class="form-group">
-      <label for="headName">👨‍👩‍👧‍👦 اسم رب الأسرة</label>
-      <input type="text" id="headName" placeholder="فلان الفلاني" required />
-    </div>
-    <p><strong> ⚠️ تحذير: الموقع لا يحفظ الوصولات بمجرد تحديث الصفحة يختفي كل شي</strong> </p>
-    <button id="printBtn">🖨️ طباعة الوصل الحسابي</button>
-  </div>
+            // إنشاء أزرار التصفية
+            const provinceFilters = document.getElementById('provinceFilters');
+            
+            // زر "الكل"
+            const allButton = document.createElement('button');
+            allButton.className = 'province-btn active';
+            allButton.textContent = 'الكل';
+            allButton.onclick = () => filterCenters('all');
+            provinceFilters.appendChild(allButton);
 
-  <script>
-    const openFormBtn = document.getElementById("openFormBtn");
-    const formSection = document.getElementById("formSection");
-    const updatePrice = document.getElementById("updatePrice");
-    const servicePrice = document.getElementById("servicePrice");
-    const totalPrice = document.getElementById("totalPrice");
+            // أزرار المحافظات
+            provinces.forEach(province => {
+                const button = document.createElement('button');
+                button.className = 'province-btn';
+                button.textContent = province;
+                button.onclick = () => filterCenters(province);
+                provinceFilters.appendChild(button);
+            });
 
-    openFormBtn.onclick = () => {
-      formSection.style.display = "block";
-      openFormBtn.style.display = "none";
-    };
-    // إنشاء قائمة الأسعار من 1000 إلى 150000 تلقائيًا
-for (let i = 1000; i <= 250000; i += 1000) {
-  const option = document.createElement("option");
-  option.value = i;
-  option.textContent = i.toLocaleString('en-US');
-  updatePrice.appendChild(option);
-}
+            // عرض جميع المراكز في البداية
+            displayCenters(examCenters);
 
-    function calculateTotal() {
-      const update = parseInt(updatePrice.value) || 0;
-      const service = parseInt(servicePrice.value) || 0;
-      totalPrice.textContent = `📦 السعر الكلي: ${(update + service).toLocaleString('en-US')} د.ع`;
-    }
+            // إضافة حدث البحث
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', handleSearch);
+        });
 
-    updatePrice.oninput = calculateTotal;
-    servicePrice.onchange = calculateTotal;
+        // عرض المراكز
+        function displayCenters(centers) {
+            const centersGrid = document.getElementById('centersGrid');
+            centersGrid.innerHTML = '';
 
-    document.getElementById("printBtn").onclick = function () {
-      const office = document.getElementById("officeName").value;
-      const officeloc = document.getElementById("officelocation").value;
-      const update = parseInt(updatePrice.value) || 0;
-      const service = parseInt(servicePrice.value) || 0;
-      const total = update + service;
-      const head = document.getElementById("headName").value;
-      const phone = document.getElementById("phone").value;
-      const format = n => n.toLocaleString('en-US') + " دينار عراقي";
+            centers.forEach(center => {
+                const card = document.createElement('div');
+                card.className = 'center-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="province-badge">${center.province}</span>
+                        <div class="center-name">${center.name}</div>
+                    </div>
+                    <div class="center-details">
+                        <p class="center-location">${center.location}</p>
+                        <a href="${center.link}" class="center-link" target="_blank">
+                            عرض الامتحانات المتوفرة
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                `;
+                centersGrid.appendChild(card);
+            });
 
-      const w = window.open('', '', 'width=800,height=600');
-      w.document.write(`
-        <html lang="ar" dir="rtl">
-          <head>
-            <title>🧾 وصل الحساب</title>
-            <style>
-  body {
-    font-family: 'Cairo', sans-serif;
-    background: #f4f6f9;
-    padding: 2em;
-    color: #333;
-  }
+            // تحديث عدد المراكز المعروضة
+            document.getElementById('total-centers').textContent = centers.length;
+        }
 
-  h2 {
-    text-align: center;
-    color: #2e7d32;
-    margin-bottom: 2em;
-    font-size: 1.8em;
-  }
+        // تصفية المراكز حسب المحافظة
+        function filterCenters(province) {
+            // تحديث حالة الأزرار النشطة
+            document.querySelectorAll('.province-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
 
-  .receipt {
-    background: #fff;
-    border-radius: 16px;
-    max-width: 600px;
-    margin: auto;
-    padding: 2em 2.5em;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  }
+            let filteredCenters;
+            if (province === 'all') {
+                filteredCenters = examCenters;
+            } else {
+                filteredCenters = examCenters.filter(center => center.province === province);
+            }
 
-  .receipt p {
-    font-size: 1.1em;
-    margin: 0.8em 0;
-    padding-bottom: 0.5em;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    justify-content: space-between;
-  }
+            displayCenters(filteredCenters);
+        }
 
-  .receipt p strong {
-    color: #444;
-    min-width: 220px;
-  }
+        // البحث في المراكز
+        function handleSearch(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            
+            if (searchTerm.trim() === '') {
+                displayCenters(examCenters);
+                return;
+            }
 
-  .receipt p.total {
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #2e7d32;
-    border-bottom: none;
-    margin-top: 1.5em;
-  }
+            const filteredCenters = examCenters.filter(center => 
+                center.name.toLowerCase().includes(searchTerm) ||
+                center.location.toLowerCase().includes(searchTerm) ||
+                center.province.toLowerCase().includes(searchTerm)
+            );
 
-  button {
-    display: block;
-    margin: 3em auto 1em;
-    background-color: #ff9800;
-    color: white;
-    padding: 1em 2.5em;
-    border: none;
-    border-radius: 12px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+            displayCenters(filteredCenters);
+        }
 
-  button:hover {
-    background-color: #fb8c00;
-    box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
-  }
-.icon-circle {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background-color: #FAF6E9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 30px auto 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease;
-}
-
-.icon-circle:hover {
-  transform: scale(1.1);
-}
-
-.icon-circle img {
-  width: 110px;
-  height: 110px;
-  filter: invert(1);
-}
-
-
-</style>
-          </head>
-          <body>
- 
- <div class="icon-circle">
-  <img src="logo.png" alt="check icon">
-</div>
- 
-  <div class="receipt">
-  <h2>🧾 وصل الحساب الإلكتروني</h2>
-  <p><strong>🏢 اسم المكتب:</strong> ${office}</p>
-  <p><strong>🚩 عنوان المكتب:</strong> ${officeloc}</p>
-  <p><strong>📞 رقم الهاتف:</strong> ${phone}</p>
-  <p><strong>💰 السعر الخاص بالتحديث:</strong> ${format(update)}</p>
-  <p><strong>🚧 الرسوم اعلاه معدة من قبل الوزارة:</strong> -</p>
-  <p><strong>🛠️ سعر الأتعاب:</strong> ${format(service)}</p>
-  <p><strong>💳 شامل رسوم الإيداع والدفع عبر الماستر كارد:</strong> ✅</p>
-  <p class="total"><strong>📦 السعر الكلي:</strong> ${format(total)}</p>
-  <p><strong>👨‍👩‍👧‍👦 لصالح السيد/ة:</strong> ${head}</p>
-</div>
-
-<button onclick="window.print()">🖨️ طباعة</button>
-
-</body>
-
-        </html>
-      `);
-      w.document.close();
-    };
-  </script>
+        // تأثيرات إضافية
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
+            }
+        });
+    </script>
 </body>
 </html>
