@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مراكز الامتحان الوطني المعتمدة</title>
+    <title>مراكز الامتحان الوطني في العراق</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -28,7 +28,7 @@
             background-color: #f8f9fa;
             color: #333;
             line-height: 1.6;
-            padding-bottom: 40px;
+            padding-bottom: 20px;
         }
         
         .container {
@@ -269,45 +269,6 @@
             font-size: 0.95rem;
         }
         
-        .center-footer {
-            padding: 15px 25px;
-            background-color: var(--light);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .center-type {
-            background-color: rgba(52, 152, 219, 0.1);
-            color: var(--secondary);
-            padding: 5px 12px;
-            border-radius: 5px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        
-        .view-btn {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-        }
-        
-        .view-btn:hover {
-            background-color: #16a085;
-            transform: scale(1.05);
-        }
-        
-        .view-btn i {
-            margin-right: 8px;
-        }
-        
         /* No results */
         .no-results {
             text-align: center;
@@ -330,21 +291,6 @@
         .no-results p {
             color: var(--gray);
             font-size: 1.1rem;
-        }
-        
-        /* Footer */
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 25px;
-            color: var(--gray);
-            font-size: 0.95rem;
-            border-top: 1px solid #eee;
-        }
-        
-        .highlight {
-            color: var(--accent);
-            font-weight: 700;
         }
         
         /* Responsive Design */
@@ -394,7 +340,7 @@
                 margin-bottom: 10px;
             }
             
-            .center-header, .center-body, .center-footer {
+            .center-header, .center-body {
                 padding: 15px;
             }
         }
@@ -409,7 +355,6 @@
                     <i class="fas fa-graduation-cap logo-icon"></i>
                     
                 </div>
-                <p class="subtitle">نظام متكامل لعرض المراكز الجامعية المختلفة في العراق، مع إمكانية التصفية حسب المحافظة والبحث السريع.</p>
             </div>
         </div>
     </header>
@@ -419,15 +364,11 @@
         <div class="stats">
             <div class="stat-item">
                 <span class="stat-number" id="total-centers">0</span>
-                <span class="stat-label">مركز جامعي</span>
+                <span class="stat-label">مركز امتحاني</span>
             </div>
             <div class="stat-item">
                 <span class="stat-number" id="total-cities">0</span>
                 <span class="stat-label">محافظة</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">2</span>
-                <span class="stat-label">نوع مركز</span>
             </div>
         </div>
     </div>
@@ -453,105 +394,102 @@
             <!-- Centers will be dynamically added here -->
         </div>
     </div>
-    
-    <!-- Footer -->
-    </footer>
 
     <script>
         // بيانات المراكز الجامعية
         const centers = [
-            {city: "الديوانية", university: "جامعة القادسية", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "بغداد", university: "الجامعة العراقية", department: "رئاسة الجامعة", center: "مركز التطوير و التعليم المستمر", type: "تعليم مستمر"},
-            {city: "كركوك", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر الكلية التقنية حويجة", type: "تعليم مستمر"},
-            {city: "بغداد", university: "جامعة بغداد", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "بغداد", university: "جامعة بغداد", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "البصرة", university: "الجامعة التقنية الجنوبية", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "بغداد", university: "الجامعة التكنولوجية", department: "رئاسة الجامعة", center: "مركز تكنولوجيا المعلومات", type: "حاسبات"},
-            {city: "بغداد", university: "الجامعة التكنولوجية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "بغداد", university: "الجامعة التقنية الوسطى", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "البصرة", university: "الجامعة التقنية الجنوبية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "كربلاء", university: "جامعة وارث الانبياء", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "البصرة", university: "جامعة البصرة", department: "رئاسة الجامعة", center: "مركز تكنولوجيا المعلومات والاتصالات", type: "حاسبات"},
-            {city: "بغداد", university: "جامعة الامام جعفر الصادق عليه السلام", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "الانبار", university: "جامعة الأنبار", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "النجف", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر كوفة", type: "تعليم مستمر"},
-            {city: "النجف", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "كركوك", university: "جامعة كركوك", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "بابل", university: "جامعة القاسم الخضراء", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "بابل", university: "جامعة بابل", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "ذي قار", university: "جامعة ذي قار", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "كربلاء", university: "جامعة كربلاء", department: "رئاسة الجامعة", center: "مركز تكنولوجيا المعلومات", type: "حاسبات"},
-            {city: "نينوى", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "ذي قار", university: "جامعة سومر", department: "رئاسة الجامعة", center: "قسم الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "بغداد", university: "جامعة البيان", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "ميسان", university: "جامعة ميسان", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "كربلاء", university: "جامعة العميد", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "المثنى", university: "جامعة المثنى", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "نينوى", university: "جامعة الموصل", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "صلاح الدين", university: "جامعة تكريت", department: "رئاسة الجامعة", center: "مركز تكنولوجيا المعلومات", type: "حاسبات"},
-            {city: "بغداد", university: "جامعة تكنولوجيا المعلومات والأتصالات", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "بابل", university: "جامعة المستقبل", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "الانبار", university: "جامعة الأنبار", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "بغداد", university: "جامعة الشعب", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "كربلاء", university: "جامعة الزهراء للبنات", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "ديالى", university: "جامعة ديالى", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "واسط", university: "جامعة واسط", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "نينوى", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "صلاح الدين", university: "جامعة سامراء", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "النجف", university: "جامعة الكوفة", department: "رئاسة الجامعة", center: "مركز البحث والتأهيل المعلوماتي", type: "حاسبات"},
-            {city: "بغداد", university: "الجامعة العراقية", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "بغداد", university: "الجامعة المستنصرية", department: "رئاسة الجامعة", center: "مركز تكنولوجيا المعلومات", type: "حاسبات"},
-            {city: "بغداد", university: "الجامعة المستنصرية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "المثنى", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "المعهد التقني الرميثة", type: "تعليم مستمر"},
-            {city: "كربلاء", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "كلية البوليتكنك كربلاء", type: "تعليم مستمر"},
-            {city: "الانبار", university: "جامعة الفلوجة", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "النجف", university: "جامعة الكفيل", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "نينوى", university: "جامعة نينوى", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "بابل", university: "جامعة بابل", department: "رئاسة الجامعة", center: "مركز التعليم المستمر وتطوير الكوادر", type: "تعليم مستمر"},
-            {city: "البصرة", university: "جامعة البصرة", department: "رئاسة الجامعة", center: "مركز اللغات الحية شعبة الايلتس", type: "تعليم مستمر"},
-            {city: "نينوى", university: "جامعة الحمدانية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "نينوى", university: "جامعة الحمدانية", department: "رئاسة الجامعة", center: "قسم الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "ذي قار", university: "جامعة الشطرة", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "بابل", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "المعهد التقني بابل", type: "تعليم مستمر"},
-            {city: "الديوانية", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "كلية البوليتكنك قادسية", type: "تعليم مستمر"},
-            {city: "بابل", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "المعهد التقني مسيب", type: "تعليم مستمر"},
-            {city: "النجف", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "المعهد التقني النجف", type: "تعليم مستمر"},
-            {city: "الديوانية", university: "جامعة القادسية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "نينوى", university: "جامعة الموصل", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "بابل", university: "جامعة بابل", department: "رئاسة الجامعة", center: "مركز التوفل", type: "تعليم مستمر"},
-            {city: "نينوى", university: "جامعة تلعفر", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "بغداد", university: "كلية الامام الكاظم عليه السلام", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "بغداد", university: "جامعة النهرين", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية", type: "حاسبات"},
-            {city: "بغداد", university: "جامعة النهرين", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "كركوك", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز السيسكو الكلية التقنية الهندسية كركوك", type: "تعليم مستمر"},
-            {city: "كركوك", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر الحويجة", type: "تعليم مستمر"},
-            {city: "صلاح الدين", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر الدور", type: "تعليم مستمر"},
-            {city: "واسط", university: "جامعة الكوت", department: "رئاسة الجامعة", center: "مركز الحاسبة وتكنولوجيا المعلومات", type: "حاسبات"},
-            {city: "كركوك", university: "جامعة كركوك", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "بغداد", university: "كلية الامام الاعظم الجامعة", department: "رئاسة الجامعة", center: "مركز اللغة الانكليزية والترجمة", type: "تعليم مستمر"},
-            {city: "بغداد", university: "الجامعة الامريكية في العراق بغداد", department: "رئاسة الجامعة", center: "معهد التعليم المستمر", type: "تعليم مستمر"},
-            {city: "البصرة", university: "جامعة البصرة", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "بغداد", university: "جامعة الكرخ للعلوم", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "بغداد", university: "جامعة آشور", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "ذي قار", university: "جامعة ذي قار", department: "رئاسة الجامعة", center: "مركز التطوير و التعليم المستمر", type: "تعليم مستمر"},
-            {city: "النجف", university: "جامعة جابر بن حيان", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "بغداد", university: "TEST", department: "رئاسة الجامعة", center: "تجريبي الرجاء عدم الحجز عليه", type: "اختبار"},
-            {city: "بغداد", university: "جامعة النسور الاهلية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "النجف", university: "الجامعة الاسلامية في النجف", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "النجف", university: "معهد العلمين للدراسات العليا", department: "عمادة معهد العلمين", center: "مركز العلمين للتعليم المستمر", type: "تعليم مستمر"},
-            {city: "بغداد", university: "جامعة التراث", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "البصرة", university: "الجامعة التقنية الجنوبية", department: "كلية البوليتكنك القرنة", center: "التعليم المستمر كلية البوليتكنك قرنة", type: "تعليم مستمر"},
-            {city: "بغداد", university: "جامعة بغداد", department: "رئاسة الجامعة", center: "المكتب الاستشاري لنظم المعلومات والحاسبات", type: "حاسبات"},
-            {city: "ذي قار", university: "الجامعة التقنية الجنوبية", department: "رئاسة الجامعة", center: "وحدة التعليم المستمر المعهد التقني الناصرية", type: "تعليم مستمر"},
-            {city: "بغداد", university: "الجامعة العراقية", department: "كلية التربية", center: "مركز التعليم والتطوير المستمر الطارمية", type: "تعليم مستمر"},
-            {city: "بغداد", university: "جامعة بغداد", department: "رئاسة الجامعة", center: "مركز التعليم المستمر مركز هواوي للشبكات", type: "تعليم مستمر"},
-            {city: "كركوك", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر كلية هندسة تقنيات النفط والغاز كركوك", type: "تعليم مستمر"},
-            {city: "بغداد", university: "جامعة بغداد", department: "رئاسة الجامعة", center: "المكتب الاستشاري لنظم المعلومات والحاسبات", type: "حاسبات"},
-            {city: "ذي قار", university: "الجامعة الوطنية للعلوم والتكنولوجيا", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "بغداد", university: "جامعة اوروك", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "الانبار", university: "جامعة المعارف", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "صلاح الدين", university: "جامعة تكريت", department: "رئاسة الجامعة", center: "مركز التعليم المستمر", type: "تعليم مستمر"},
-            {city: "بابل", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "الكلية التقنية المسيب", type: "تعليم مستمر"},
+            {city: "الديوانية", university: "جامعة القادسية", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "بغداد", university: "الجامعة العراقية", department: "رئاسة الجامعة", center: "مركز التطوير و التعليم المستمر"},
+            {city: "كركوك", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر الكلية التقنية حويجة"},
+            {city: "بغداد", university: "جامعة بغداد", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "بغداد", university: "جامعة بغداد", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "البصرة", university: "الجامعة التقنية الجنوبية", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "بغداد", university: "الجامعة التكنولوجية", department: "رئاسة الجامعة", center: "مركز تكنولوجيا المعلومات"},
+            {city: "بغداد", university: "الجامعة التكنولوجية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "بغداد", university: "الجامعة التقنية الوسطى", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "البصرة", university: "الجامعة التقنية الجنوبية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "كربلاء", university: "جامعة وارث الانبياء", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "البصرة", university: "جامعة البصرة", department: "رئاسة الجامعة", center: "مركز تكنولوجيا المعلومات والاتصالات"},
+            {city: "بغداد", university: "جامعة الامام جعفر الصادق عليه السلام", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "الانبار", university: "جامعة الأنبار", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "النجف", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر كوفة"},
+            {city: "النجف", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "كركوك", university: "جامعة كركوك", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "بابل", university: "جامعة القاسم الخضراء", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "بابل", university: "جامعة بابل", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "ذي قار", university: "جامعة ذي قار", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "كربلاء", university: "جامعة كربلاء", department: "رئاسة الجامعة", center: "مركز تكنولوجيا المعلومات"},
+            {city: "نينوى", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "ذي قار", university: "جامعة سومر", department: "رئاسة الجامعة", center: "قسم الحاسبة الالكترونية"},
+            {city: "بغداد", university: "جامعة البيان", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "ميسان", university: "جامعة ميسان", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "كربلاء", university: "جامعة العميد", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "المثنى", university: "جامعة المثنى", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "نينوى", university: "جامعة الموصل", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "صلاح الدين", university: "جامعة تكريت", department: "رئاسة الجامعة", center: "مركز تكنولوجيا المعلومات"},
+            {city: "بغداد", university: "جامعة تكنولوجيا المعلومات والأتصالات", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "بابل", university: "جامعة المستقبل", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "الانبار", university: "جامعة الأنبار", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "بغداد", university: "جامعة الشعب", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "كربلاء", university: "جامعة الزهراء للبنات", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "ديالى", university: "جامعة ديالى", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "واسط", university: "جامعة واسط", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "نينوى", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "صلاح الدين", university: "جامعة سامراء", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "النجف", university: "جامعة الكوفة", department: "رئاسة الجامعة", center: "مركز البحث والتأهيل المعلوماتي"},
+            {city: "بغداد", university: "الجامعة العراقية", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "بغداد", university: "الجامعة المستنصرية", department: "رئاسة الجامعة", center: "مركز تكنولوجيا المعلومات"},
+            {city: "بغداد", university: "الجامعة المستنصرية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "المثنى", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "المعهد التقني الرميثة"},
+            {city: "كربلاء", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "كلية البوليتكنك كربلاء"},
+            {city: "الانبار", university: "جامعة الفلوجة", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "النجف", university: "جامعة الكفيل", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "نينوى", university: "جامعة نينوى", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "بابل", university: "جامعة بابل", department: "رئاسة الجامعة", center: "مركز التعليم المستمر وتطوير الكوادر"},
+            {city: "البصرة", university: "جامعة البصرة", department: "رئاسة الجامعة", center: "مركز اللغات الحية شعبة الايلتس"},
+            {city: "نينوى", university: "جامعة الحمدانية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "نينوى", university: "جامعة الحمدانية", department: "رئاسة الجامعة", center: "قسم الحاسبة الالكترونية"},
+            {city: "ذي قار", university: "جامعة الشطرة", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "بابل", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "المعهد التقني بابل"},
+            {city: "الديوانية", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "كلية البوليتكنك قادسية"},
+            {city: "بابل", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "المعهد التقني مسيب"},
+            {city: "النجف", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "المعهد التقني النجف"},
+            {city: "الديوانية", university: "جامعة القادسية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "نينوى", university: "جامعة الموصل", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "بابل", university: "جامعة بابل", department: "رئاسة الجامعة", center: "مركز التوفل"},
+            {city: "نينوى", university: "جامعة تلعفر", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "بغداد", university: "كلية الامام الكاظم عليه السلام", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "بغداد", university: "جامعة النهرين", department: "رئاسة الجامعة", center: "مركز الحاسبة الالكترونية"},
+            {city: "بغداد", university: "جامعة النهرين", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "كركوك", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز السيسكو الكلية التقنية الهندسية كركوك"},
+            {city: "كركوك", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر الحويجة"},
+            {city: "صلاح الدين", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر الدور"},
+            {city: "واسط", university: "جامعة الكوت", department: "رئاسة الجامعة", center: "مركز الحاسبة وتكنولوجيا المعلومات"},
+            {city: "كركوك", university: "جامعة كركوك", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "بغداد", university: "كلية الامام الاعظم الجامعة", department: "رئاسة الجامعة", center: "مركز اللغة الانكليزية والترجمة"},
+            {city: "بغداد", university: "الجامعة الامريكية في العراق بغداد", department: "رئاسة الجامعة", center: "معهد التعليم المستمر"},
+            {city: "البصرة", university: "جامعة البصرة", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "بغداد", university: "جامعة الكرخ للعلوم", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "بغداد", university: "جامعة آشور", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "ذي قار", university: "جامعة ذي قار", department: "رئاسة الجامعة", center: "مركز التطوير و التعليم المستمر"},
+            {city: "النجف", university: "جامعة جابر بن حيان", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "بغداد", university: "TEST", department: "رئاسة الجامعة", center: "تجريبي الرجاء عدم الحجز عليه"},
+            {city: "بغداد", university: "جامعة النسور الاهلية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "النجف", university: "الجامعة الاسلامية في النجف", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "النجف", university: "معهد العلمين للدراسات العليا", department: "عمادة معهد العلمين", center: "مركز العلمين للتعليم المستمر"},
+            {city: "بغداد", university: "جامعة التراث", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "البصرة", university: "الجامعة التقنية الجنوبية", department: "كلية البوليتكنك القرنة", center: "التعليم المستمر كلية البوليتكنك قرنة"},
+            {city: "بغداد", university: "جامعة بغداد", department: "رئاسة الجامعة", center: "المكتب الاستشاري لنظم المعلومات والحاسبات"},
+            {city: "ذي قار", university: "الجامعة التقنية الجنوبية", department: "رئاسة الجامعة", center: "وحدة التعليم المستمر المعهد التقني الناصرية"},
+            {city: "بغداد", university: "الجامعة العراقية", department: "كلية التربية", center: "مركز التعليم والتطوير المستمر الطارمية"},
+            {city: "بغداد", university: "جامعة بغداد", department: "رئاسة الجامعة", center: "مركز التعليم المستمر مركز هواوي للشبكات"},
+            {city: "كركوك", university: "الجامعة التقنية الشمالية", department: "رئاسة الجامعة", center: "مركز التعليم المستمر كلية هندسة تقنيات النفط والغاز كركوك"},
+            {city: "بغداد", university: "جامعة بغداد", department: "رئاسة الجامعة", center: "المكتب الاستشاري لنظم المعلومات والحاسبات"},
+            {city: "ذي قار", university: "الجامعة الوطنية للعلوم والتكنولوجيا", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "بغداد", university: "جامعة اوروك", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "الانبار", university: "جامعة المعارف", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "صلاح الدين", university: "جامعة تكريت", department: "رئاسة الجامعة", center: "مركز التعليم المستمر"},
+            {city: "بابل", university: "جامعة الفرات الأوسط التقنية", department: "رئاسة الجامعة", center: "الكلية التقنية المسيب"},
         ];
         
         // متغيرات التطبيق
@@ -568,9 +506,6 @@
         
         // تهيئة التطبيق
         document.addEventListener('DOMContentLoaded', function() {
-            // تحديث السنة الحالية في الفوتر
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-            
             // عرض الإحصائيات
             updateStats();
             
@@ -668,12 +603,6 @@
                 const centerCard = document.createElement('div');
                 centerCard.className = 'center-card';
                 
-                // تحديد لون البطاقة حسب نوع المركز
-                const cardColor = center.type === "حاسبات" ? "#3498db" : 
-                                 center.type === "تعليم مستمر" ? "#1abc9c" : "#e74c3c";
-                
-                centerCard.style.borderTopColor = cardColor;
-                
                 centerCard.innerHTML = `
                     <div class="center-header">
                         <h3>${center.city}</h3>
@@ -686,19 +615,11 @@
                             ${center.center}
                         </p>
                     </div>
-
                 `;
                 
                 centersListEl.appendChild(centerCard);
             });
         }
-        
-        // عرض تفاصيل المركز (وظيفة تجريبية)
-        function viewCenter(university, center) {
-            alert(`سيتم عرض التفاصيل الخاصة بامتحانات:\n${university}\n${center}\n\n(هذه رسالة تجريبية، في التطبيق الفعلي سيتم توجيه المستخدم إلى صفحة التفاصيل)`);
-        }
     </script>
 </body>
 </html>
-
-
